@@ -4,9 +4,18 @@ var nunjucks = require('nunjucks');
 
 var app = express();
 
-
 //configure nunjucks
 nunjucks.configure('views', {noCache:true})
 app.set('view engine', 'html'); //specifies the file should be viewed as HTML
 app.engine('html', nunjucks.render); //specifies to render file as html 
+
+
+var models = require('./models');
+
+models.User.sync({})
+	.then(function(){
+		return models.Page.sync({})
+	})
+	.catch(console.error);
+
 
