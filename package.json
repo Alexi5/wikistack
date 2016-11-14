@@ -1,0 +1,23 @@
+{
+  "name": "morgan",
+  "version": "1.7.0",
+  "description": "morgan",
+  "main": "index.js",
+  "scripts": {
+    "test": "node",
+    "start": "nodemon -e html,js,css ./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexi5/wikistack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alexi5/wikistack/issues"
+  },
+  "homepage": "https://github.com/Alexi5/wikistack#readme",
+  "dependencies": {
+    "pg": "^6.1.0"
+  }
+}
