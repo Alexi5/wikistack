@@ -4,12 +4,14 @@ var nunjucks = require('nunjucks');
 
 var app = express();
 
-//configure nunjucks
-nunjucks.configure('views', {noCache:true})
-app.set('view engine', 'html'); //specifies the file should be viewed as HTML
-app.engine('html', nunjucks.render); //specifies to render file as html 
+//implement express staice
+app.use(express.static('public'));
 
+//bodyParser implement
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
+//implements models -- models module can be accessed	
 var models = require('./models');
 
 models.User.sync({})
@@ -17,5 +19,24 @@ models.User.sync({})
 		return models.Page.sync({})
 	})
 	.catch(console.error);
+
+//implements router -- app can use our router
+//to access wiki pages
+var wikiRouter = require('./routes/wiki');
+app.use('/wiki', wikiRouter);
+
+
+//configure nunjucks
+nunjucks.configure('views', {noCache:true})
+
+//specifies the file should be viewed as HTML
+app.set('view engine', 'html'); 
+//specifies to render file as html 
+app.engine('html', nunjucks.render); 
+
+app.listen(3000);
+
+
+
 
 
